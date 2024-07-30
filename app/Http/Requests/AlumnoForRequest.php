@@ -22,10 +22,8 @@ class AlumnoForRequest extends FormRequest
     public function rules(): array
     {
         return [
-            return [
-                'Password'=>'requiered',
-                'User'=>'requiered',
-            ];
+            'Password' => 'requiered',
+            'User' => 'requiered',
         ];
     }
 }
