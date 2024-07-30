@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '11.x-dev',
-        'version' => '11.9999999.9999999.9999999-dev',
-        'reference' => '2a8b77b0b198befbc7187af2e57c645c4714abdd',
+        'pretty_version' => 'dev-nueva-rama',
+        'version' => 'dev-nueva-rama',
+        'reference' => 'b0539e71b619980b33c287ca732f1649937fe455',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -596,9 +596,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '11.x-dev',
-            'version' => '11.9999999.9999999.9999999-dev',
-            'reference' => '2a8b77b0b198befbc7187af2e57c645c4714abdd',
+            'pretty_version' => 'dev-nueva-rama',
+            'version' => 'dev-nueva-rama',
+            'reference' => 'b0539e71b619980b33c287ca732f1649937fe455',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -863,9 +863,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '11.2.8',
-            'version' => '11.2.8.0',
-            'reference' => 'a7a29e8d3113806f18f99d670f580a30e8ffff39',
+            'pretty_version' => '11.2.9',
+            'version' => '11.2.9.0',
+            'reference' => 'c197bbaaca360efda351369bf1fd9cc1ca6bcbf7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
