@@ -171,11 +171,11 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
+    'classes_auth_card' => '',
+    'classes_auth_header' => 'bg-gradient-info',
     'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
+    'classes_auth_footer' => 'text-center',
+    'classes_auth_icon' => 'fa-lg text-info',
     'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
@@ -308,7 +308,7 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'buscar',
         ],
         [
             'text' => 'blog',
@@ -316,77 +316,57 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'pages',
+            'text' => 'paginas',
             'url' => 'admin/pages',
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'CONFIGURACION DE LA CUENTA'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Perfil',
+            'url' => 'auth.login',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
+            'text' => 'Cambiar contraseña',
+            'url' => 'auth.passwords.reset',
             'icon' => 'fas fa-fw fa-lock',
         ],
+
+        ['header' => 'GESTIÓN DE BIBLIOTECA'],
         [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-           'url' => '#',
+            'text' => 'Alumnos',
+            'url'  => 'alumnos',// URL asociada a la vista de alumnos
+            'icon' => 'fas fa-fw fa-user-graduate',
         ],
         [
-           'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
+            'text' => 'Libros',
+            'url'  => 'libros',  // URL asociada a la vista de libros
+            'icon' => 'fas fa-fw fa-book',
         ],
         [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
+            'text' => 'Autores',
+            'url'  => 'autores',  // URL asociada a la vista de autores
+            'icon' => 'fas fa-fw fa-pen-nib',
         ],
+        [
+            'text' => 'Categorías',
+            'url'  => 'categorias',  // URL asociada a la vista de categorías
+            'icon' => 'fas fa-fw fa-tags',
+        ],
+        [
+            'text' => 'Editoriales',
+            'url'  => 'editoriales',  // URL asociada a la vista de editoriales
+            'icon' => 'fas fa-fw fa-building',
+        ],
+        [
+            'text' => 'Préstamos',
+            'url'  => 'prestamos',  // URL asociada a la vista de préstamos
+            'icon' => 'fas fa-fw fa-handshake',
+        ],
+
+
     ],
 
     /*
