@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
 @section('content')
 <div class="container">
@@ -15,4 +21,13 @@
     </table>
     <a href="{{ route('estados.index') }}" class="btn btn-primary">Volver a la lista</a>
 </div>
-@endsection
+@stop
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+   
+@stop

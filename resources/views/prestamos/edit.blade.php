@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
 @section('content')
 <div class="container">
@@ -29,4 +35,13 @@
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 </div>
-@endsection
+@stop
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+   
+@stop
