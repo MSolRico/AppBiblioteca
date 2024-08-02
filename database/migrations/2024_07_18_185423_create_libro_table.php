@@ -21,6 +21,8 @@ class CreateLibroTable extends Migration
             $table->date('Edicion')->nullable();
             $table->text('Idioma');
             $table->text('Estado');
+            $table->text('NombreCategoria');
+            $table->text('Numero_Ejemplar');
             $table->text('Descripcion');
             $table->integer('CantPaginas')->nullable();
             $table->integer('CopiasDisp')->nullable();

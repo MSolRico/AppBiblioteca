@@ -9,7 +9,7 @@ class Editorial extends Model
 {
     use HasFactory;
 
-    // Nombre de la tabla
+    // Nombre de la tabla asociada a este modelo
     protected $table = 'editorial';
 
     // Nombre de la clave primaria
@@ -21,7 +21,7 @@ class Editorial extends Model
     // Tipo de la clave primaria
     protected $keyType = 'int';
 
-    // Desactivar timestamps automáticos
+    // Desactivar timestamps automáticos (created_at, updated_at)
     public $timestamps = false;
 
     // Campos que se pueden asignar en masa
@@ -30,10 +30,11 @@ class Editorial extends Model
         'Descripcion',
     ];
 
-    // Relación con la entidad Libro
+    // Relación de uno a muchos con el modelo Libro
     public function libros()
     {
         return $this->hasMany(Libro::class, 'Cod_Editorial', 'Cod_Editorial');
     }
 }
+
 

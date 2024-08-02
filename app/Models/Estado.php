@@ -9,7 +9,7 @@ class Estado extends Model
 {
     use HasFactory;
 
-    // Nombre de la tabla
+    // Nombre de la tabla asociada a este modelo
     protected $table = 'estado';
 
     // Nombre de la clave primaria
@@ -21,23 +21,24 @@ class Estado extends Model
     // Tipo de la clave primaria
     protected $keyType = 'int';
 
-    // Desactivar timestamps automáticos
+    // Desactivar timestamps automáticos (created_at, updated_at)
     public $timestamps = false;
 
     // Campos que se pueden asignar en masa
     protected $fillable = [
-        'Disponibilidad',
+        'NombreEstado', // Asume que hay un campo 'NombreEstado' para la descripción del estado
     ];
 
-    // Relación con la entidad Libro
+    // Relación de uno a muchos con el modelo Libro
     public function libros()
     {
         return $this->hasMany(Libro::class, 'Estado', 'Id_Estado');
     }
 
-    // Relación con la entidad Ejemplar
+    // Relación de uno a muchos con el modelo Ejemplar
     public function ejemplares()
     {
         return $this->hasMany(Ejemplar::class, 'Estado_Ejemplar', 'Id_Estado');
     }
 }
+
