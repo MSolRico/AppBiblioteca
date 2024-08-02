@@ -19,44 +19,54 @@
         </div>
 
         <div class="form-group">
-            <label for="Cod_Autor">Autor</label>
-            <select class="form-control" id="Cod_Autor" name="Cod_Autor" required>
+            <label for="Autor">Autor</label>
+            <select class="form-control" id="Autor" name="Autor" required>
                 @foreach($autores as $autor)
-                    <option value="{{ $autor->Cod_Autor }}">{{ $autor->NombreAutor }}</option>
+                    <option value="{{ $autor->NombreAutor }}">{{ $autor->NombreAutor }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="Cod_Editorial">Editorial</label>
-            <select class="form-control" id="Cod_Editorial" name="Cod_Editorial" required>
+            <label for="Editorial">Editorial</label>
+            <select class="form-control" id="Editorial" name="Editorial" required>
                 @foreach($editoriales as $editorial)
-                    <option value="{{ $editorial->Cod_Editorial }}">{{ $editorial->NombreEditorial }}</option>
+                    <option value="{{ $editorial->NombreEditorial }}">{{ $editorial->NombreEditorial }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="Cod_Categoria">Categoría</label>
-            <select class="form-control" id="Cod_Categoria" name="Cod_Categoria" required>
+            <label for="Edicion">Edición</label>
+            <input type="date" class="form-control" id="Edicion" name="Edicion">
+        </div>
+
+        <div class="form-group">
+            <label for="Idioma">Idioma</label>
+            <input type="text" class="form-control" id="Idioma" name="Idioma" required>
+        </div>
+
+        <div class="form-group">
+            <label for="NombreCategoria">Categoría</label>
+            <select class="form-control" id="NombreCategoria" name="NombreCategoria" required>
                 @foreach($categorias as $categoria)
-                    <option value="{{ $categoria->Cod_Categoria }}">{{ $categoria->NombreCategoria }}</option>
+                    <option value="{{ $categoria->NombreCategoria }}">{{ $categoria->NombreCategoria }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="Cod_Estado">Estado</label>
-            <select class="form-control" id="Cod_Estado" name="Cod_Estado" required>
+            <label for="Estado">Estado</label>
+            <select class="form-control" id="Estado" name="Estado" required>
                 @foreach($estados as $estado)
-                    <option value="{{ $estado->Id_Estado }}">{{ $estado->NombreEstado }}</option>
+                    <option value="{{ $estado->Disponibilidad }}">{{ $estado->Disponibilidad }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
             <label for="Numero_Ejemplar">Número de Ejemplar</label>
-            <input type="number" class="form-control" id="Numero_Ejemplar" name="Numero_Ejemplar" required>
+            <input type="text" class="form-control" id="Numero_Ejemplar" name="Numero_Ejemplar" required>
         </div>
 
         <div class="form-group">
@@ -66,12 +76,12 @@
 
         <div class="form-group">
             <label for="CantPaginas">Cantidad de Páginas</label>
-            <input type="number" class="form-control" id="CantPaginas" name="CantPaginas" required>
+            <input type="number" class="form-control" id="CantPaginas" name="CantPaginas">
         </div>
 
         <div class="form-group">
             <label for="CopiasDisp">Copias Disponibles</label>
-            <input type="number" class="form-control" id="CopiasDisp" name="CopiasDisp" required>
+            <input type="number" class="form-control" id="CopiasDisp" name="CopiasDisp">
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>

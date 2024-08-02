@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Prestamo;
-use App\Http\Controllers\Controller;
+use App\Models\Alumno;
+use App\Models\Libro;
 use Illuminate\Http\Request;
 
 class PrestamoController extends Controller
@@ -15,50 +17,69 @@ class PrestamoController extends Controller
 
     public function create()
     {
-        return view('prestamos.create');
+        // Obtener datos para los desplegables
+        $alumnos = Alumno::all();
+        $libros = Libro::all();
+
+        return view('prestamos.create', compact('alumnos', 'libros'));
     }
 
     public function store(Request $request)
     {
-        $prestamo = new Prestamo();
-        $prestamo->Dni_Alumno = $request->Dni_Alumno;
-        $prestamo->Cod_Libro = $request->Cod_Libro;
-        $prestamo->Fecha_Prestamo = $request->Fecha_Prestamo;
-        $prestamo->Fecha_Devolucion = $request->Fecha_Devolucion;
-        $prestamo->save();
+        // Validar la solicitud
+        $validated = $request->validate([
+            'Dni_Alumno' => 'required|exists:alumno,Dni_Alumno',
+            'Cod_Libro' => 'required|exists:libro,Cod_Libro',
+            'Fecha_Prestamo' => 'required|date',
+            'Fecha_Devolucion' => 'nullable|date|after_or_equal:Fecha_Prestamo',
+        ]);
 
-        return redirect()->route('prestamos.index');
+        // Crear el préstamo
+        Prestamo::create($validated);
+
+        return redirect()->route('prestamos.index')->with('success', 'Préstamo registrado exitosamente');
     }
 
     public function show($id)
     {
-        $prestamo = Prestamo::find($id);
+        $prestamo = Prestamo::findOrFail($id);
         return view('prestamos.show', compact('prestamo'));
     }
 
     public function edit($id)
     {
-        $prestamo = Prestamo::find($id);
-        return view('prestamos.edit', compact('prestamo'));
+        $prestamo = Prestamo::findOrFail($id);
+        // Obtener datos para los desplegables
+        $alumnos = Alumno::all();
+        $libros = Libro::all();
+
+        return view('prestamos.edit', compact('prestamo', 'alumnos', 'libros'));
     }
 
     public function update(Request $request, $id)
     {
-        $prestamo = Prestamo::find($id);
-        $prestamo->Dni_Alumno = $request->Dni_Alumno;
-        $prestamo->Cod_Libro = $request->Cod_Libro;
-        $prestamo->Fecha_Prestamo = $request->Fecha_Prestamo;
-        $prestamo->Fecha_Devolucion = $request->Fecha_Devolucion;
-        $prestamo->save();
+        // Validar la solicitud
+        $validated = $request->validate([
+            'Dni_Alumno' => 'required|exists:alumno,Dni_Alumno',
+            'Cod_Libro' => 'required|exists:libro,Cod_Libro',
+            'Fecha_Prestamo' => 'required|date',
+            'Fecha_Devolucion' => 'nullable|date|after_or_equal:Fecha_Prestamo',
+        ]);
 
-        return redirect()->route('prestamos.index');
+        // Encontrar el préstamo
+        $prestamo = Prestamo::findOrFail($id);
+
+        // Actualizar el préstamo
+        $prestamo->update($validated);
+
+        return redirect()->route('prestamos.index')->with('success', 'Préstamo actualizado exitosamente');
     }
 
     public function destroy($id)
     {
-        $prestamo = Prestamo::find($id);
+        $prestamo = Prestamo::findOrFail($id);
         $prestamo->delete();
 
-        return redirect()->route('prestamos.index');
+        return redirect()->route('prestamos.index')->with('success', 'Préstamo eliminado exitosamente');
     }
 }

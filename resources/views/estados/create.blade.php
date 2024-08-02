@@ -13,7 +13,7 @@
         @csrf
         <div class="form-group">
             <label for="Disponibilidad">Disponibilidad</label>
-            <input type="text" name="Disponibilidad" class="form-control">
+            <input type="text" name="Disponibilidad" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>

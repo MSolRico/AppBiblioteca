@@ -14,7 +14,7 @@
         @method('PUT')
         <div class="form-group">
             <label for="Disponibilidad">Disponibilidad</label>
-            <input type="text" name="Disponibilidad" class="form-control" value="{{ $estado->Disponibilidad }}">
+            <input type="text" name="Disponibilidad" class="form-control" value="{{ $estado->Disponibilidad }}" required>
         </div>
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>

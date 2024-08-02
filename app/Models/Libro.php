@@ -30,6 +30,7 @@ class Libro extends Model
         'Cod_Autor',
         'Cod_Editorial',
         'Cod_Categoria',
+        'Edicion',
         'Idioma',
         'Cod_Estado',
         'Numero_Ejemplar',

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Estado;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller
@@ -20,39 +20,52 @@ class EstadoController extends Controller
 
     public function store(Request $request)
     {
-        $estado = new Estado();
-        $estado->Disponibilidad = $request->Disponibilidad;
-        $estado->save();
+        $request->validate([
+            'Disponibilidad' => 'required|string|max:255',
+        ]);
 
-        return redirect()->route('estados.index');
+        Estado::create($request->all());
+
+        return redirect()->route('estados.index')->with('success', 'Estado creado exitosamente.');
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Estado $estado)
     {
-        $estado = Estado::find($id);
         return view('estados.show', compact('estado'));
     }
 
-    public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Estado $estado)
     {
-        $estado = Estado::find($id);
         return view('estados.edit', compact('estado'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Estado $estado)
     {
-        $estado = Estado::find($id);
-        $estado->Disponibilidad = $request->Disponibilidad;
-        $estado->save();
+        $request->validate([
+            'Disponibilidad' => 'required|string|max:255',
+        ]);
 
-        return redirect()->route('estados.index');
+        $estado->update($request->all());
+
+        return redirect()->route('estados.index')->with('success', 'Estado actualizado exitosamente.');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Estado $estado)
     {
-        $estado = Estado::find($id);
         $estado->delete();
-
-        return redirect()->route('estados.index');
+        return redirect()->route('estados.index')->with('success', 'Estado eliminado exitosamente.');
     }
 }
+

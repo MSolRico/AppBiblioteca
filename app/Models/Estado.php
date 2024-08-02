@@ -26,7 +26,7 @@ class Estado extends Model
 
     // Campos que se pueden asignar en masa
     protected $fillable = [
-        'NombreEstado', // Asume que hay un campo 'NombreEstado' para la descripción del estado
+        'Disponibilidad', // Asume que hay un campo 'Disponibilidad' para la descripción del estado
     ];
 
     // Relación de uno a muchos con el modelo Libro
