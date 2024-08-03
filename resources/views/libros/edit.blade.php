@@ -37,6 +37,10 @@
             <input type="text" name="Estado" class="form-control" value="{{ $libro->Estado }}">
         </div>
         <div class="form-group">
+            <label for="Categoria">Categoria</label>
+            <input type="text" name="Categoria" class="form-control" value="{{ $libro->Categoria }}">
+        </div>
+        <div class="form-group">
             <label for="Descripcion">Descripción</label>
             <textarea name="Descripcion" class="form-control">{{ $libro->Descripcion }}</textarea>
         </div>
