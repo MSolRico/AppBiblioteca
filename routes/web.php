@@ -26,7 +26,6 @@ Route::resource('prestamos', PrestamoController::class);
 Route::prefix('admin')->group(function () {
     Route::get('alumnos', [AlumnoController::class, 'index'])->name('admin.alumnos.index');
     Route::get('libros', [LibroController::class, 'index'])->name('admin.libros.index');
-    Route::post('/libros', [LibroController::class, 'store'])->name('libros.store');
     Route::get('autores', [AutorController::class, 'index'])->name('admin.autores.index');
     Route::get('categorias', [CategoriaController::class, 'index'])->name('admin.categorias.index');
     Route::get('editoriales', [EditorialController::class, 'index'])->name('admin.editoriales.index');

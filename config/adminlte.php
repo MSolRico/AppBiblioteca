@@ -316,21 +316,21 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'paginas',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
+            'text' => 'Sitio web del Instituto',
+            'url' => 'https://ens46-sfe.infd.edu.ar/sitio/',
+            'icon' => "fa fa-graduation-cap",
+            'label' => 1,
             'label_color' => 'success',
         ],
         ['header' => 'CONFIGURACION DE LA CUENTA'],
         [
             'text' => 'Perfil',
-            'url' => 'auth.login',
+            'url' => 'login',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Cambiar contraseña',
-            'url' => 'auth.passwords.reset',
+            'url' => 'password/reset',
             'icon' => 'fas fa-fw fa-lock',
         ],
 
@@ -363,6 +363,11 @@ return [
         [
             'text' => 'Préstamos',
             'url'  => 'prestamos',  // URL asociada a la vista de préstamos
+            'icon' => 'fas fa-fw fa-handshake',
+        ],
+        [
+            'text' => 'Estado',
+            'url'  => 'estados',  // URL asociada a la vista de préstamos
             'icon' => 'fas fa-fw fa-handshake',
         ],
 
