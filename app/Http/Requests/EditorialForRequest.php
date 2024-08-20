@@ -22,9 +22,8 @@ class EditorialForRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Cod_editorial' => 'required|string|max:10', 
-            'NombreEditorial' => 'required|string|max:256',
-            'Descripcion' => 'nullable|string',
+            'NombreEditorial' => 'required|string|max:255', // Validación para el nombre de la editorial
+            'Descripcion' => 'nullable|string', // Descripción opcional
         ];
     }
 }

@@ -30,12 +30,13 @@ class Categoria extends Model
         'Descripcion',
     ];
 
-    // Relación de uno a muchos con el modelo Libro
-    public function libros()
+    // Relación muchos a muchos con el modelo Libro
+    public function libro()
     {
         return $this->belongsToMany(Libro::class, 'categoria_libro', 'Cod_Categoria', 'Cod_Libro');
     }
 }
+
 
 
 

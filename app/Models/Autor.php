@@ -30,9 +30,10 @@ class Autor extends Model
         'Descripcion',
     ];
 
-    // Relación de uno a muchos con el modelo Libro
-    public function libros()
+    // Relación muchos a muchos con el modelo Libro
+    public function libro()
     {
         return $this->belongsToMany(Libro::class, 'autor_libro', 'Cod_Autor', 'Cod_Libro');
     }
 }
+

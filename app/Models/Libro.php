@@ -27,9 +27,6 @@ class Libro extends Model
     // Campos que se pueden asignar en masa
     protected $fillable = [
         'Titulo',
-        'Cod_Autor',
-        'Cod_Editorial',
-        'Cod_Categoria',
         'Edicion',
         'Idioma',
         'Cod_Estado',
@@ -39,33 +36,34 @@ class Libro extends Model
         'CopiasDisp',
     ];
 
-    // Relación con la entidad Autor
+    // Relación muchos a muchos con Autor
     public function autor()
     {
         return $this->belongsToMany(Autor::class, 'autor_libro', 'Cod_Libro', 'Cod_Autor');
     }
 
-    // Relación con la entidad Editorial
+    // Relación muchos a muchos con Editorial
     public function editorial()
     {
         return $this->belongsToMany(Editorial::class, 'editorial_libro', 'Cod_Libro', 'Cod_Editorial');
     }
 
-    // Relación con la entidad Categoria
+    // Relación muchos a muchos con Categoria
     public function categoria()
     {
         return $this->belongsToMany(Categoria::class, 'categoria_libro', 'Cod_Libro', 'Cod_Categoria');
     }
 
-    // Relación con la entidad Estado
+    // Relación uno a muchos con Estado
     public function estado()
     {
         return $this->belongsTo(Estado::class, 'Cod_Estado', 'Id_Estado');
     }
 
-    // Relación con la entidad Ejemplar
-    public function ejemplares()
+    // Relación uno a muchos con Ejemplar
+    public function ejemplar()
     {
         return $this->hasMany(Ejemplar::class, 'Cod_Libro', 'Cod_Libro');
     }
 }
+
