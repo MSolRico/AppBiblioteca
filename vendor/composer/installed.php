@@ -1,14 +1,14 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '11.x-dev',
-        'version' => '11.9999999.9999999.9999999-dev',
-        'reference' => '30aa9a4b901d2ae155e9ecc3c36675c49d69c403',
+        'pretty_version' => 'dev-ramaSol',
+        'version' => 'dev-ramaSol',
+        'reference' => '73e70cd4f323e1f1e799943dfef251c545d0d2c5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
-        ),
+    ),
     'versions' => array(
         'almasaeed2010/adminlte' => array(
             'pretty_version' => 'v3.2.0',
@@ -596,9 +596,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '11.x-dev',
-            'version' => '11.9999999.9999999.9999999-dev',
-            'reference' => '30aa9a4b901d2ae155e9ecc3c36675c49d69c403',
+            'pretty_version' => 'dev-ramaSol',
+            'version' => 'dev-ramaSol',
+            'reference' => '73e70cd4f323e1f1e799943dfef251c545d0d2c5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -973,8 +973,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
