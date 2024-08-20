@@ -33,7 +33,7 @@ class Categoria extends Model
     // Relación de uno a muchos con el modelo Libro
     public function libros()
     {
-        return $this->hasMany(Libro::class, 'Cod_Categoria', 'Cod_Categoria');
+        return $this->belongsToMany(Libro::class, 'categoria_libro', 'Cod_Categoria', 'Cod_Libro');
     }
 }
 

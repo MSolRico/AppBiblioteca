@@ -14,13 +14,12 @@ class LibroController extends Controller
 {
     public function index()
     {
-        $libros = Libro::all();
+        $libros = Libro::with('autor', 'editorial', 'categoria', 'estado')->get();
         return view('libros.index', compact('libros'));
     }
 
     public function create()
     {
-        // Obtener datos para los desplegables
         $autores = Autor::all();
         $editoriales = Editorial::all();
         $categorias = Categoria::all();
@@ -31,39 +30,35 @@ class LibroController extends Controller
 
     public function store(LibroForRequest $request)
     {
-    // Validar la solicitud y obtener los datos validados
-    $validated = $request->validated();
+        $validated = $request->validated();
 
-    // Crear el libro usando los datos validados
-    Libro::create([
-        'Titulo' => $validated['Titulo'],
-        'Autor' => $validated['Cod_Autor'], // Esto debe coincidir con la clave foránea y la estructura de la tabla
-        'Editorial' => $validated['Cod_Editorial'], // Lo mismo aplica aquí
-        'Edicion' => $validated['Edicion'],
-        'Idioma' => $validated['Idioma'],
-        'Estado' => $validated['Cod_Estado'], // Y aquí también
-        'NombreCategoria' => $validated['Cod_Categoria'],
-        'Numero_Ejemplar' => $validated['Numero_Ejemplar'],
-        'Descripcion' => $validated['Descripcion'],
-        'CantPaginas' => $validated['CantPaginas'],
-        'CopiasDisp' => $validated['CopiasDisp'],
-    ]);
+        Libro::create([
+            'Titulo' => $validated['Titulo'],
+            'Autor' => $validated['Cod_Autor'],
+            'Editorial' => $validated['Cod_editorial'],
+            'Edicion' => $validated['Edicion'],
+            'Idioma' => $validated['Idioma'],
+            'Estado' => $validated['Cod_Estado'],
+            'NombreCategoria' => $validated['Cod_Categoria'],
+            'Descripcion' => $validated['Descripcion'],
+            'CantPaginas' => $validated['CantPaginas'],
+            'CopiasDisp' => $validated['CopiasDisp'],
+        ]);
+        
+        $libro->autores()->attach($request->Autores);
+        $libro->categorias()->attach($request->Categorias);
+        $libro->editoriales()->attach($request->Editoriales);
 
-    return redirect()->route('libros.index')->with('success', 'Libro agregado exitosamente');
+        return redirect()->route('libros.index')->with('success', 'Libro agregado exitosamente');
     }
 
-
-
-    public function show($id)
+    public function show(Libro $libro)
     {
-        $libro = Libro::findOrFail($id);
         return view('libros.show', compact('libro'));
     }
 
-    public function edit($id)
+    public function edit(Libro $libro)
     {
-        $libro = Libro::findOrFail($id);
-        // Obtener datos para los desplegables
         $autores = Autor::all();
         $editoriales = Editorial::all();
         $categorias = Categoria::all();
@@ -72,35 +67,29 @@ class LibroController extends Controller
         return view('libros.edit', compact('libro', 'autores', 'editoriales', 'categorias', 'estados'));
     }
 
-    public function update(Request $request, $id)
+    public function update(LibroForRequest $request, Libro $libro)
     {
-        // Validar la solicitud
-        $validated = $request->validate([
-            'Titulo' => 'required|string|max:255',
-            'Cod_Autor' => 'required|exists:autor,Cod_Autor',
-            'Cod_Editorial' => 'required|exists:editorial,Cod_Editorial',
-            'Edicion' => 'nullable|date',
-            'Idioma' => 'required|string|max:255',
-            'Cod_Estado' => 'required|exists:estado,Id_Estado',
-            'Cod_Categoria' => 'required|exists:categoria,Cod_Categoria',
-            'Numero_Ejemplar' => 'required|integer',
-            'Descripcion' => 'nullable|string',
-            'CantPaginas' => 'required|integer',
-            'CopiasDisp' => 'required|integer',
+        $validated = $request->validated();
+
+        $libro->update([
+            'Titulo' => $validated['Titulo'],
+            'Autor' => $validated['Cod_Autor'],
+            'Editorial' => $validated['Cod_Editorial'],
+            'Edicion' => $validated['Edicion'],
+            'Idioma' => $validated['Idioma'],
+            'Estado' => $validated['Cod_Estado'],
+            'NombreCategoria' => $validated['Cod_Categoria'],
+            'Numero_Ejemplar' => $validated['Numero_Ejemplar'],
+            'Descripcion' => $validated['Descripcion'],
+            'CantPaginas' => $validated['CantPaginas'],
+            'CopiasDisp' => $validated['CopiasDisp'],
         ]);
-
-        // Encontrar el libro
-        $libro = Libro::findOrFail($id);
-
-        // Actualizar el libro
-        $libro->update($validated);
 
         return redirect()->route('libros.index')->with('success', 'Libro actualizado exitosamente');
     }
 
-    public function destroy($id)
+    public function destroy(Libro $libro)
     {
-        $libro = Libro::findOrFail($id);
         $libro->delete();
 
         return redirect()->route('libros.index')->with('success', 'Libro eliminado exitosamente');

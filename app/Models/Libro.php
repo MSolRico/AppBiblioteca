@@ -42,19 +42,19 @@ class Libro extends Model
     // Relación con la entidad Autor
     public function autor()
     {
-        return $this->belongsTo(Autor::class, 'Cod_Autor', 'Cod_Autor');
+        return $this->belongsToMany(Autor::class, 'autor_libro', 'Cod_Libro', 'Cod_Autor');
     }
 
     // Relación con la entidad Editorial
     public function editorial()
     {
-        return $this->belongsTo(Editorial::class, 'Cod_Editorial', 'Cod_Editorial');
+        return $this->belongsToMany(Editorial::class, 'editorial_libro', 'Cod_Libro', 'Cod_Editorial');
     }
 
     // Relación con la entidad Categoria
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class, 'Cod_Categoria', 'Cod_Categoria');
+        return $this->belongsToMany(Categoria::class, 'categoria_libro', 'Cod_Libro', 'Cod_Categoria');
     }
 
     // Relación con la entidad Estado

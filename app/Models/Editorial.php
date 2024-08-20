@@ -33,7 +33,7 @@ class Editorial extends Model
     // Relación de uno a muchos con el modelo Libro
     public function libros()
     {
-        return $this->hasMany(Libro::class, 'Cod_Editorial', 'Cod_Editorial');
+        return $this->belongsToMany(Libro::class, 'editorial_libro', 'Cod_Editorial', 'Cod_Libro');
     }
 }
 

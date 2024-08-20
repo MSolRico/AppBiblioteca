@@ -6,25 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEjemplarTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('ejemplar', function (Blueprint $table) {
             $table->id('Id_Ejemplar');
-            $table->text('Numero_Ejemplar');
-            $table->text('Estado_Ejemplar');
+            $table->unsignedBigInteger('Cod_Libro');
+            $table->string('Numero_Ejemplar');
+            $table->string('Estado_Ejemplar');
             $table->timestamps();
+
+            $table->foreign('Cod_Libro')->references('Cod_Libro')->on('libro')->onDelete('cascade');
         });
     }
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+
+    public function down()
     {
         Schema::dropIfExists('ejemplar');
     }
-};
+}

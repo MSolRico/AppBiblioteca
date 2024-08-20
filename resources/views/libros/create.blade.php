@@ -3,13 +3,11 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Agregar Nuevo Libro</h1>
 @stop
 
 @section('content')
 <div class="container">
-    <h1>Agregar Nuevo Libro</h1>
-
     <form action="{{ route('libros.store') }}" method="POST">
         @csrf
 
@@ -19,19 +17,19 @@
         </div>
 
         <div class="form-group">
-            <label for="Autor">Autor</label>
-            <select class="form-control" id="Autor" name="Autor" required>
+            <label for="Autores">Autores</label>
+            <select class="form-control" id="Autores" name="Autores[]" multiple required>
                 @foreach($autores as $autor)
-                    <option value="{{ $autor->NombreAutor }}">{{ $autor->NombreAutor }}</option>
+                    <option value="{{ $autor->Cod_Autor }}">{{ $autor->NombreAutor }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="Editorial">Editorial</label>
-            <select class="form-control" id="Editorial" name="Editorial" required>
+            <label for="Editoriales">Editoriales</label>
+            <select class="form-control" id="Editoriales" name="Editoriales[]" multiple required>
                 @foreach($editoriales as $editorial)
-                    <option value="{{ $editorial->NombreEditorial }}">{{ $editorial->NombreEditorial }}</option>
+                    <option value="{{ $editorial->Cod_editorial }}">{{ $editorial->NombreEditorial }}</option>
                 @endforeach
             </select>
         </div>
@@ -47,10 +45,10 @@
         </div>
 
         <div class="form-group">
-            <label for="NombreCategoria">Categoría</label>
-            <select class="form-control" id="NombreCategoria" name="NombreCategoria" required>
+            <label for="Categorias">Categorías</label>
+            <select class="form-control" id="Categorias" name="Categorias[]" multiple required>
                 @foreach($categorias as $categoria)
-                    <option value="{{ $categoria->NombreCategoria }}">{{ $categoria->NombreCategoria }}</option>
+                    <option value="{{ $categoria->Cod_Categoria }}">{{ $categoria->NombreCategoria }}</option>
                 @endforeach
             </select>
         </div>
@@ -59,14 +57,9 @@
             <label for="Estado">Estado</label>
             <select class="form-control" id="Estado" name="Estado" required>
                 @foreach($estados as $estado)
-                    <option value="{{ $estado->Disponibilidad }}">{{ $estado->Disponibilidad }}</option>
+                    <option value="{{ $estado->Id_Estado }}">{{ $estado->Disponibilidad }}</option>
                 @endforeach
             </select>
-        </div>
-
-        <div class="form-group">
-            <label for="Numero_Ejemplar">Número de Ejemplar</label>
-            <input type="text" class="form-control" id="Numero_Ejemplar" name="Numero_Ejemplar" required>
         </div>
 
         <div class="form-group">
@@ -97,3 +90,4 @@
 @section('js')
    
 @stop
+

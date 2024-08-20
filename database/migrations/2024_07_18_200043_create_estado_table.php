@@ -6,24 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEstadoTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('estado', function (Blueprint $table) {
             $table->id('Id_Estado');
-            $table->text('Disponibilidad');
+            $table->string('Disponibilidad');
             $table->timestamps();
         });
     }
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+
+    public function down()
     {
         Schema::dropIfExists('estado');
     }
-};
+}
+

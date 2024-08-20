@@ -6,25 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEditorialTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('editorial', function (Blueprint $table) {
             $table->id('Cod_editorial');
-            $table->text('NombreEditorial');
-            $table->text('Descripcion');
+            $table->string('NombreEditorial');
+            $table->text('Descripcion')->nullable();
             $table->timestamps();
         });
     }
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+
+    public function down()
     {
         Schema::dropIfExists('editorial');
     }
-};
+}
