@@ -10,14 +10,14 @@ class CreateEditorialLibroTable extends Migration
     {
         Schema::create('editorial_libro', function (Blueprint $table) {
             $table->unsignedBigInteger('Cod_Libro');
-            $table->unsignedBigInteger('Cod_Editorial');
+            $table->unsignedBigInteger('Cod_editorial');
 
             // Foreign Keys
             $table->foreign('Cod_Libro')->references('Cod_Libro')->on('libro')->onDelete('cascade');
-            $table->foreign('Cod_Editorial')->references('Cod_editorial')->on('editorial')->onDelete('cascade');
+            $table->foreign('Cod_editorial')->references('Cod_editorial')->on('editorial')->onDelete('cascade');
 
             // Unique constraint to avoid duplicate pairs
-            $table->unique(['Cod_Libro', 'Cod_Editorial']);
+            $table->unique(['Cod_Libro', 'Cod_editorial']);
         });
     }
 

@@ -20,37 +20,47 @@ class LibroController extends Controller
 
     public function create()
     {
-        $autores = Autor::all();
-        $editoriales = Editorial::all();
-        $categorias = Categoria::all();
-        $estados = Estado::all();
+        $autor = Autor::all();
+        $editorial = Editorial::all();
+        $categoria = Categoria::all();
+        $estado = Estado::all();
 
-        return view('libros.create', compact('autores', 'editoriales', 'categorias', 'estados'));
+        return view('libros.create', compact('autor', 'editorial', 'categoria', 'estado'));
     }
 
     public function store(LibroForRequest $request)
-    {
-        $validated = $request->validated();
+{
+    $validated = $request->validated();
 
-        Libro::create([
-            'Titulo' => $validated['Titulo'],
-            'Autor' => $validated['Cod_Autor'],
-            'Editorial' => $validated['Cod_editorial'],
-            'Edicion' => $validated['Edicion'],
-            'Idioma' => $validated['Idioma'],
-            'Estado' => $validated['Cod_Estado'],
-            'NombreCategoria' => $validated['Cod_Categoria'],
-            'Descripcion' => $validated['Descripcion'],
-            'CantPaginas' => $validated['CantPaginas'],
-            'CopiasDisp' => $validated['CopiasDisp'],
-        ]);
-        
-        $libro->autores()->attach($request->Autores);
-        $libro->categorias()->attach($request->Categorias);
-        $libro->editoriales()->attach($request->Editoriales);
+    // Crear una nueva instancia del modelo Libro
+    $libro = new Libro();
+    $libro->Titulo = $validated['Titulo'];
+    $libro->Edicion = $validated['Edicion'];
+    $libro->Idioma = $validated['Idioma'];
+    $libro->Descripcion = $validated['Descripcion'];
+    $libro->CantPaginas = $validated['CantPaginas'];
+    $libro->CopiasDisp = $validated['CopiasDisp'];
+    $libro->Id_Estado = $validated['Id_Estado'];
+    $libro->save();
 
-        return redirect()->route('libros.index')->with('success', 'Libro agregado exitosamente');
+    // Asignar las relaciones de muchos a muchos
+    if ($request->has('Cod_Autor')) {
+        $libro->autor()->attach($request->Cod_Autor);
     }
+
+    if ($request->has('Categoria')) {
+        $libro->categoria()->attach($request->Categoria);
+    }
+
+    if ($request->has('Editorial')) {
+        $libro->editorial()->attach($request->Editorial);
+    }
+
+    return redirect()->route('libros.index')->with('success', 'Libro agregado exitosamente');
+}
+
+
+    
 
     public function show(Libro $libro)
     {
@@ -59,34 +69,41 @@ class LibroController extends Controller
 
     public function edit(Libro $libro)
     {
-        $autores = Autor::all();
-        $editoriales = Editorial::all();
-        $categorias = Categoria::all();
-        $estados = Estado::all();
+        $autor = Autor::all();
+        $editorial = Editorial::all();
+        $categoria = Categoria::all();
+        $estado = Estado::all();
 
-        return view('libros.edit', compact('libro', 'autores', 'editoriales', 'categorias', 'estados'));
+        return view('libros.edit', compact('libro', 'autor', 'editorial', 'categoria', 'estado'));
     }
 
     public function update(LibroForRequest $request, Libro $libro)
-    {
-        $validated = $request->validated();
+{
+    // Asignar las propiedades del libro desde el request
+    $libro->Titulo = $request->Titulo;
+    $libro->Edicion = $request->Edicion;
+    $libro->Idioma = $request->Idioma;
+    $libro->Descripcion = $request->Descripcion;
+    $libro->CantPaginas = $request->CantPaginas;
+    $libro->CopiasDisp = $request->CopiasDisp;
+    $libro->Id_Estado = $request->Id_Estado;
+    $libro->save();
 
-        $libro->update([
-            'Titulo' => $validated['Titulo'],
-            'Autor' => $validated['Cod_Autor'],
-            'Editorial' => $validated['Cod_Editorial'],
-            'Edicion' => $validated['Edicion'],
-            'Idioma' => $validated['Idioma'],
-            'Estado' => $validated['Cod_Estado'],
-            'NombreCategoria' => $validated['Cod_Categoria'],
-            'Numero_Ejemplar' => $validated['Numero_Ejemplar'],
-            'Descripcion' => $validated['Descripcion'],
-            'CantPaginas' => $validated['CantPaginas'],
-            'CopiasDisp' => $validated['CopiasDisp'],
-        ]);
-
-        return redirect()->route('libros.index')->with('success', 'Libro actualizado exitosamente');
+    // Actualizar las relaciones de muchos a muchos
+    if ($request->has('Cod_Autor')) {
+        $libro->autor()->sync($request->Cod_Autor);
     }
+
+    if ($request->has('Categoria')) {
+        $libro->categoria()->sync($request->Categoria);
+    }
+
+    if ($request->has('Editorial')) {
+        $libro->editorial()->sync($request->Editorial);
+    }
+
+    return redirect()->route('libros.index')->with('success', 'Libro actualizado exitosamente');
+}
 
     public function destroy(Libro $libro)
     {

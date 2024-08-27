@@ -22,7 +22,7 @@ class AutorForRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Cod_Autor' => 'required|string|max:10', 
+            'Cod_Autor' => 'required|int|max:10', 
             'NombreAutor' => 'required|string|max:256',
             'Descripcion' => 'nullable|string',
         ];

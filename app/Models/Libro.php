@@ -29,26 +29,25 @@ class Libro extends Model
         'Titulo',
         'Edicion',
         'Idioma',
-        'Cod_Estado',
-        'Numero_Ejemplar',
+        'Id_Estado',
         'Descripcion',
         'CantPaginas',
         'CopiasDisp',
     ];
 
-    // Relación muchos a muchos con Autor
+    // Relación muchos a muchos con Autores
     public function autor()
     {
         return $this->belongsToMany(Autor::class, 'autor_libro', 'Cod_Libro', 'Cod_Autor');
     }
 
-    // Relación muchos a muchos con Editorial
+    // Relación muchos a muchos con Editoriales
     public function editorial()
     {
         return $this->belongsToMany(Editorial::class, 'editorial_libro', 'Cod_Libro', 'Cod_Editorial');
     }
 
-    // Relación muchos a muchos con Categoria
+    // Relación muchos a muchos con Categorías
     public function categoria()
     {
         return $this->belongsToMany(Categoria::class, 'categoria_libro', 'Cod_Libro', 'Cod_Categoria');
@@ -57,13 +56,12 @@ class Libro extends Model
     // Relación uno a muchos con Estado
     public function estado()
     {
-        return $this->belongsTo(Estado::class, 'Cod_Estado', 'Id_Estado');
+        return $this->belongsTo(Estado::class, 'Id_Estado', 'Id_Estado');
     }
 
-    // Relación uno a muchos con Ejemplar
+    // Relación uno a muchos con Ejemplares
     public function ejemplar()
     {
         return $this->hasMany(Ejemplar::class, 'Cod_Libro', 'Cod_Libro');
     }
 }
-

@@ -7,6 +7,17 @@
 @stop
 
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="container">
     <form action="{{ route('libros.store') }}" method="POST">
         @csrf
@@ -17,18 +28,18 @@
         </div>
 
         <div class="form-group">
-            <label for="Autores">Autores</label>
-            <select class="form-control" id="Autores" name="Autores[]" multiple required>
-                @foreach($autores as $autor)
+            <label for="autores">Autores</label>
+            <select class="form-control" id="autor" name="Cod_Autor[]" multiple required>
+                @foreach($autor as $autor)
                     <option value="{{ $autor->Cod_Autor }}">{{ $autor->NombreAutor }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="Editoriales">Editoriales</label>
-            <select class="form-control" id="Editoriales" name="Editoriales[]" multiple required>
-                @foreach($editoriales as $editorial)
+            <label for="editoriales">Editoriales</label>
+            <select class="form-control" id="editorial" name="Editorial[]" multiple required>
+                @foreach($editorial as $editorial)
                     <option value="{{ $editorial->Cod_editorial }}">{{ $editorial->NombreEditorial }}</option>
                 @endforeach
             </select>
@@ -45,18 +56,18 @@
         </div>
 
         <div class="form-group">
-            <label for="Categorias">Categorías</label>
-            <select class="form-control" id="Categorias" name="Categorias[]" multiple required>
-                @foreach($categorias as $categoria)
+            <label for="categorias">Categoría</label>
+            <select class="form-control" id="categoria" name="Categoria[]" multiple required>
+                @foreach($categoria as $categoria)
                     <option value="{{ $categoria->Cod_Categoria }}">{{ $categoria->NombreCategoria }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="Estado">Estado</label>
-            <select class="form-control" id="Estado" name="Estado" required>
-                @foreach($estados as $estado)
+            <label for="Id_Estado">Estado</label>
+            <select class="form-control" id="Id_Estado" name="Id_Estado" required>
+                @foreach($estado as $estado)
                     <option value="{{ $estado->Id_Estado }}">{{ $estado->Disponibilidad }}</option>
                 @endforeach
             </select>
@@ -84,10 +95,4 @@
 
 @section('css')
     {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
-
-@section('js')
-   
-@stop
-

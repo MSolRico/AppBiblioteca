@@ -13,7 +13,7 @@ class Editorial extends Model
     protected $table = 'editorial';
 
     // Nombre de la clave primaria
-    protected $primaryKey = 'Cod_Editorial';
+    protected $primaryKey = 'Cod_editorial';
 
     // Clave primaria autoincremental
     public $incrementing = true;
@@ -33,6 +33,6 @@ class Editorial extends Model
     // Relación muchos a muchos con el modelo Libro
     public function libro()
     {
-        return $this->belongsToMany(Libro::class, 'editorial_libro', 'Cod_Editorial', 'Cod_Libro');
+        return $this->belongsToMany(Libro::class, 'editorial_libro', 'Cod_editorial', 'Cod_Libro');
     }
 }
