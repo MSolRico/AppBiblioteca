@@ -28,11 +28,11 @@
             <tr>
                 <td>{{ $libro->Cod_Libro }}</td>
                 <td>{{ $libro->Titulo }}</td>
-                <td>{{ $libro->Autor }}</td>
-                <td>{{ $libro->Editorial }}</td>
-                <td>{{ $libro->Edicion }}</td>
+                <td>{{ $libro->Cod_Autor }}</td>
+                <td>{{ $libro->Cod_editorial }}</td>
+                <td>{{ $libro->Cod_editorial }}</td>
                 <td>{{ $libro->Idioma }}</td>
-                <td>{{ $libro->Estado }}</td>
+                <td>{{ $libro->Id_Estado }}</td>
                 <td>
                     <a href="{{ route('libros.show', $libro->Cod_Libro) }}" class="btn btn-info">Ver</a>
                     <a href="{{ route('libros.edit', $libro->Cod_Libro) }}" class="btn btn-warning">Editar</a>

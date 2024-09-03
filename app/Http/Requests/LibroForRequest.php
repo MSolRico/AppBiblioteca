@@ -20,23 +20,23 @@ class LibroForRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-            'Titulo' => 'required|string|max:255',
-            'Cod_Autor' => 'required|array',
-            'Cod_Autor.*' => 'exists:Autor,Cod_Autor',
-            'Editorial' => 'required|array',
-            'Editorial.*' => 'exists:editorial,Cod_editorial',
-            'Edicion' => 'required|date',
-            'Idioma' => 'required|string|max:255',
-            'Id_Estado' => 'required|exists:estado,Id_Estado',
-            'Categoria' => 'required|array',
-            'Categoria.*' => 'exists:categoria,Cod_Categoria',
-            'Descripcion' => 'nullable|string',
-            'CantPaginas' => 'nullable|integer|min:0',
-            'CopiasDisp' => 'nullable|integer|min:0',
-        ];
-    }
+{
+    return [
+        'Titulo' => 'required|string|max:255',
+        'Cod_Autor' => 'required|array',
+        'Cod_Autor.*' => 'exists:autor,Cod_Autor',
+        'Cod_editorial' => 'required|array',
+        'Cod_editorial.*' => 'exists:editorial,Cod_editorial',
+        'Cod_Categoria' => 'required|array',
+        'Cod_Categoria.*' => 'exists:categoria,Cod_Categoria',
+        'Edicion' => 'required|date',
+        'Idioma' => 'required|string|max:255',
+        'Id_Estado' => 'required|exists:estado,Id_Estado',
+        'Descripcion' => 'nullable|string',
+        'CantPaginas' => 'nullable|integer|min:0',
+        'CopiasDisp' => 'nullable|integer|min:0',
+    ];
+}
 
     /**
      * Get custom error messages for validation rules.

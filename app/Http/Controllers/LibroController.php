@@ -30,35 +30,35 @@ class LibroController extends Controller
 
     public function store(LibroForRequest $request)
 {
+    // Validar los datos del formulario
     $validated = $request->validated();
 
-    // Crear una nueva instancia del modelo Libro
+    // Crear una nueva instancia del modelo Libro y asignar los valores validados
     $libro = new Libro();
     $libro->Titulo = $validated['Titulo'];
+    //$libro->Cod_Autor = $validated['Cod_Autor'];
+    //$libro->Editorial = $validated['Editorial'];
+    //$libro->Categoria = $validated['Categoria'];
     $libro->Edicion = $validated['Edicion'];
     $libro->Idioma = $validated['Idioma'];
     $libro->Descripcion = $validated['Descripcion'];
     $libro->CantPaginas = $validated['CantPaginas'];
     $libro->CopiasDisp = $validated['CopiasDisp'];
     $libro->Id_Estado = $validated['Id_Estado'];
+    
+    // Guardar el libro en la base de datos
     $libro->save();
+    
+    //dd($libro->toArray());
 
-    // Asignar las relaciones de muchos a muchos
-    if ($request->has('Cod_Autor')) {
-        $libro->autor()->attach($request->Cod_Autor);
-    }
+    // Sincronizar las relaciones muchos a muchos
+    $libro->autor()->sync($request->Cod_Autor);
+    $libro->categoria()->sync($request->Cod_Categoria);
+    $libro->editorial()->sync($request->Cod_editorial);
 
-    if ($request->has('Categoria')) {
-        $libro->categoria()->attach($request->Categoria);
-    }
-
-    if ($request->has('Editorial')) {
-        $libro->editorial()->attach($request->Editorial);
-    }
-
+    // Redirigir al índice de libros con un mensaje de éxito
     return redirect()->route('libros.index')->with('success', 'Libro agregado exitosamente');
 }
-
 
     
 

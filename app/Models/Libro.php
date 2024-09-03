@@ -27,10 +27,13 @@ class Libro extends Model
     // Campos que se pueden asignar en masa
     protected $fillable = [
         'Titulo',
+        'Cod_Autor',
+        'Cod_Editorial',
         'Edicion',
         'Idioma',
         'Id_Estado',
         'Descripcion',
+        'Cod_Categoria',
         'CantPaginas',
         'CopiasDisp',
     ];
