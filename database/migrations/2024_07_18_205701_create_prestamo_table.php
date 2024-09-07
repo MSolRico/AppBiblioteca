@@ -10,16 +10,10 @@ class CreatePrestamoTable extends Migration
     {
         Schema::create('prestamo', function (Blueprint $table) {
             $table->id('Cod_Prestamo');
-            $table->unsignedBigInteger('Dni_Alumno');
-            $table->unsignedBigInteger('Cod_Libro');
-            $table->unsignedBigInteger('Cod_Ejemplar');
             $table->date('Fecha_Prestamo');
             $table->date('Fecha_Devolucion')->nullable();
             $table->timestamps();
 
-            $table->foreign('Dni_Alumno')->references('Dni_Alumno')->on('alumno')->onDelete('cascade');
-            $table->foreign('Cod_Libro')->references('Cod_Libro')->on('libro')->onDelete('cascade');
-            $table->foreign('Cod_Ejemplar')->references('Id_Ejemplar')->on('ejemplar')->onDelete('cascade');
         });
     }
 

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Detalle del Libro')
 
 @section('content_header')
     <h1>Detalle del Libro</h1>
@@ -20,50 +20,81 @@
             <th>Título</th>
             <td>{{ $libro->Titulo }}</td>
         </tr>
+
+        <!-- Autores -->
         <tr>
-            <th>Autor</th>
+            <th>Autor(es)</th>
             <td>
-                @foreach($libro->autor as $autor)
-                    {{ $autor->NombreAutor }}@if(!$loop->last), @endif
-                @endforeach
+                @if($libro->autores && $libro->autores->count() > 0)
+                    @foreach($libro->autores as $autor)
+                        {{ $autor->NombreAutor }}@if(!$loop->last), @endif
+                    @endforeach
+                @else
+                    <em>No hay autores asociados</em>
+                @endif
             </td>
         </tr>
+
+        <!-- Editoriales -->
         <tr>
-            <th>Editorial</th>
+            <th>Editorial(es)</th>
             <td>
-                @foreach($libro->editorial as $editorial)
-                    {{ $editorial->NombreEditorial }}@if(!$loop->last), @endif
-                @endforeach
+                @if($libro->editoriales && $libro->editoriales->count() > 0)
+                    @foreach($libro->editoriales as $editorial)
+                        {{ $editorial->NombreEditorial }}@if(!$loop->last), @endif
+                    @endforeach
+                @else
+                    <em>No hay editoriales asociadas</em>
+                @endif
             </td>
         </tr>
+
         <tr>
             <th>Edición</th>
             <td>{{ $libro->Edicion }}</td>
         </tr>
+
         <tr>
             <th>Idioma</th>
             <td>{{ $libro->Idioma }}</td>
         </tr>
+
+        <!-- Estado -->
         <tr>
             <th>Estado</th>
-            <td>{{ $libro->estado->Disponibilidad }}</td>
+            <td>
+                @if($libro->estado)
+                    {{ $libro->estado->NombreEstado }}
+                @else
+                    <em>No hay estado asociado</em>
+                @endif
+            </td>
         </tr>
+
         <tr>
             <th>Descripción</th>
             <td>{{ $libro->Descripcion }}</td>
         </tr>
+
+        <!-- Categorías -->
         <tr>
-            <th>Categoría</th>
+            <th>Categoría(s)</th>
             <td>
-                @foreach($libro->categoria as $categoria)
-                    {{ $categoria->NombreCategoria }}@if(!$loop->last), @endif
-                @endforeach
+                @if($libro->categorias && $libro->categorias->count() > 0)
+                    @foreach($libro->categorias as $categoria)
+                        {{ $categoria->NombreCategoria }}@if(!$loop->last), @endif
+                    @endforeach
+                @else
+                    <em>No hay categorías asociadas</em>
+                @endif
             </td>
         </tr>
+
         <tr>
             <th>Cantidad de Páginas</th>
             <td>{{ $libro->CantPaginas }}</td>
         </tr>
+
         <tr>
             <th>Copias Disponibles</th>
             <td>{{ $libro->CopiasDisp }}</td>
@@ -78,10 +109,9 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    {{-- Añadir aquí hojas de estilos adicionales --}}
 @stop
 
 @section('js')
-    
+    {{-- Scripts adicionales --}}
 @stop

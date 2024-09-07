@@ -15,8 +15,8 @@
             <tr>
                 <th>ID</th>
                 <th>Título</th>
-                <th>Autor</th>
-                <th>Editorial</th>
+                <th>Autor(es)</th>
+                <th>Editorial(es)</th>
                 <th>Edición</th>
                 <th>Idioma</th>
                 <th>Estado</th>
@@ -28,11 +28,37 @@
             <tr>
                 <td>{{ $libro->Cod_Libro }}</td>
                 <td>{{ $libro->Titulo }}</td>
-                <td>{{ $libro->Cod_Autor }}</td>
-                <td>{{ $libro->Cod_editorial }}</td>
-                <td>{{ $libro->Cod_editorial }}</td>
+
+                <!-- Autores -->
+                <td>
+                    @if($libro->autores->isNotEmpty())
+                        @foreach($libro->autores as $autor)
+                            {{ $autor->NombreAutor }}@if(!$loop->last), @endif
+                        @endforeach
+                    @else
+                        <em>Sin autor</em>
+                    @endif
+                </td>
+
+                <!-- Editoriales -->
+                <td>
+                    @if($libro->editoriales->isNotEmpty())
+                        @foreach($libro->editoriales as $editorial)
+                            {{ $editorial->NombreEditorial }}@if(!$loop->last), @endif
+                        @endforeach
+                    @else
+                        <em>Sin editorial</em>
+                    @endif
+                </td>
+
+                <td>{{ $libro->Edicion }}</td>
                 <td>{{ $libro->Idioma }}</td>
-                <td>{{ $libro->Id_Estado }}</td>
+
+                <!-- Estado -->
+                <td>
+                    {{ $libro->estado ? $libro->estado->NombreEstado : 'Sin estado' }}
+                </td>
+
                 <td>
                     <a href="{{ route('libros.show', $libro->Cod_Libro) }}" class="btn btn-info">Ver</a>
                     <a href="{{ route('libros.edit', $libro->Cod_Libro) }}" class="btn btn-warning">Editar</a>
@@ -51,10 +77,8 @@
 
 @section('css')
     {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
- 
+    {{-- Add here extra scripts --}}
 @stop
-
