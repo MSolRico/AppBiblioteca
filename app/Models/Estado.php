@@ -21,13 +21,14 @@ class Estado extends Model
     // Tipo de la clave primaria
     protected $keyType = 'int';
 
-    // Desactivar timestamps automáticos (created_at, updated_at)
-    public $timestamps = false;
-
     // Campos que se pueden asignar en masa
     protected $fillable = [
-        'Disponibilidad', // Asume que hay un campo 'Disponibilidad' para la descripción del estado
+        'Disponibilidad',
+        'NombreEstado',
     ];
+
+    // Desactivar timestamps automáticos (created_at, updated_at)
+    public $timestamps = false;
 
     // Relación de uno a muchos con el modelo Libro
     public function libros()

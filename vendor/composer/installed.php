@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'dev-ramaSol',
-        'version' => 'dev-ramaSol',
-        'reference' => '73e70cd4f323e1f1e799943dfef251c545d0d2c5',
+        'pretty_version' => '11.x-dev',
+        'version' => '11.9999999.9999999.9999999-dev',
+        'reference' => '51480ee10e4b62d60d3cffff647cf57b0fb52f63',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -596,9 +596,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-ramaSol',
-            'version' => 'dev-ramaSol',
-            'reference' => '73e70cd4f323e1f1e799943dfef251c545d0d2c5',
+            'pretty_version' => '11.x-dev',
+            'version' => '11.9999999.9999999.9999999-dev',
+            'reference' => '51480ee10e4b62d60d3cffff647cf57b0fb52f63',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

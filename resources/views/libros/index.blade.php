@@ -56,7 +56,7 @@
 
                 <!-- Estado -->
                 <td>
-                    {{ $libro->estado ? $libro->estado->NombreEstado : 'Sin estado' }}
+                    {{ $libro->estado ? $libro->estado->Disponibilidad : 'Sin estado' }}
                 </td>
 
                 <td>

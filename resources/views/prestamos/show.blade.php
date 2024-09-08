@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Vista Préstamo')
 
 @section('content_header')
     <h1>Vista Préstamo</h1>
@@ -9,26 +9,26 @@
 @section('content')
 <div class="container">
     <h1>Detalle del Préstamo</h1>
-    <table class="table">
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
-            <td>{{ $prestamo->Id_prestamo }}</td>
+            <td>{{ $prestamo->Cod_Prestamo }}</td>
         </tr>
         <tr>
-            <th>DNI Alumno</th>
-            <td>{{ $prestamo->DNI_Alumno }}</td>
+            <th>Alumno</th>
+            <td>{{ $prestamo->alumno->User ?? 'No disponible' }}</td>
         </tr>
         <tr>
             <th>Libro</th>
-            <td>{{ $prestamo->Libro }}</td>
+            <td>{{ $prestamo->libro->Titulo ?? 'No disponible' }}</td>
         </tr>
         <tr>
             <th>Fecha de Préstamo</th>
-            <td>{{ $prestamo->Fecha_prestamo }}</td>
+            <td>{{ $prestamo->Fecha_Prestamo }}</td>
         </tr>
         <tr>
             <th>Fecha de Devolución</th>
-            <td>{{ $prestamo->Fecha_devolucion }}</td>
+            <td>{{ $prestamo->Fecha_Devolucion ?? 'No registrada' }}</td>
         </tr>
     </table>
     <a href="{{ route('prestamos.index') }}" class="btn btn-primary">Volver a la lista</a>
@@ -36,10 +36,9 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    {{-- Estilos personalizados opcionales --}}
 @stop
 
 @section('js')
-   
+    {{-- Scripts personalizados opcionales --}}
 @stop

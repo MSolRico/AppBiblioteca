@@ -3,18 +3,18 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Panel de control Prestamos</h1>
+    <h1>Panel de Control - Préstamos</h1>
 @stop
 
 @section('content')
 <div class="container">
     <h1>Lista de Préstamos</h1>
-    <a href="{{ route('prestamos.create') }}" class="btn btn-primary">Crear Préstamo</a>
-    <table class="table">
+    <a href="{{ route('prestamos.create') }}" class="btn btn-primary mb-3">Crear Préstamo</a>
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>DNI Alumno</th>
+                <th>Alumno</th>
                 <th>Libro</th>
                 <th>Fecha de Préstamo</th>
                 <th>Fecha de Devolución</th>
@@ -24,15 +24,15 @@
         <tbody>
             @foreach($prestamos as $prestamo)
             <tr>
-                <td>{{ $prestamo->Id_prestamo }}</td>
-                <td>{{ $prestamo->DNI_Alumno }}</td>
-                <td>{{ $prestamo->Libro }}</td>
-                <td>{{ $prestamo->Fecha_prestamo }}</td>
-                <td>{{ $prestamo->Fecha_devolucion }}</td>
+                <td>{{ $prestamo->Cod_Prestamo }}</td>
+                <td>{{ $prestamo->alumno->User ?? 'No disponible' }}</td>
+                <td>{{ $prestamo->libro->Titulo ?? 'No disponible' }}</td>
+                <td>{{ $prestamo->Fecha_Prestamo }}</td>
+                <td>{{ $prestamo->Fecha_Devolucion ?? 'No registrada' }}</td>
                 <td>
-                    <a href="{{ route('prestamos.show', $prestamo->Id_prestamo) }}" class="btn btn-info">Ver</a>
-                    <a href="{{ route('prestamos.edit', $prestamo->Id_prestamo) }}" class="btn btn-warning">Editar</a>
-                    <form action="{{ route('prestamos.destroy', $prestamo->Id_prestamo) }}" method="POST" style="display:inline-block;">
+                    <a href="{{ route('prestamos.show', $prestamo->Cod_Prestamo) }}" class="btn btn-info">Ver</a>
+                    <a href="{{ route('prestamos.edit', $prestamo->Cod_Prestamo) }}" class="btn btn-warning">Editar</a>
+                    <form action="{{ route('prestamos.destroy', $prestamo->Cod_Prestamo) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este préstamo?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -46,10 +46,9 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    {{-- Estilos personalizados opcionales --}}
 @stop
 
 @section('js')
-   
+    {{-- Scripts personalizados opcionales --}}
 @stop

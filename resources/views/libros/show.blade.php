@@ -64,7 +64,7 @@
             <th>Estado</th>
             <td>
                 @if($libro->estado)
-                    {{ $libro->estado->NombreEstado }}
+                    {{ $libro->estado->Disponibilidad }}
                 @else
                     <em>No hay estado asociado</em>
                 @endif

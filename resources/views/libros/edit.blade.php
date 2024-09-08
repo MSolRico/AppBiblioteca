@@ -63,7 +63,7 @@
             <select name="Id_Estado" class="form-control">
                 @foreach($estado as $estado)
                     <option value="{{ $estado->id }}" {{ $libro->Id_Estado == $estado->id ? 'selected' : '' }}>
-                        {{ $estado->NombreEstado }}
+                        {{ $estado->Disponibilidad }}
                     </option>
                 @endforeach
             </select>
