@@ -47,10 +47,18 @@ class LibroController extends Controller
         // Guardar el libro en la base de datos
         $libro->save();
         
-        // Sincronizar las relaciones muchos a muchos
-        $libro->autores()->sync($request->Cod_Autor);
-        $libro->categorias()->sync($request->Cod_Categoria);
-        $libro->editoriales()->sync($request->Cod_editorial);
+        // Sincronizar las relaciones muchos a muchos usando sync para evitar duplicados
+        if ($request->has('Cod_Autor')) {
+            $libro->autores()->sync($request->input('Cod_Autor'));
+        }
+
+        if ($request->has('Cod_Categoria')) {
+            $libro->categorias()->sync($request->input('Cod_Categoria'));
+        }
+
+        if ($request->has('Cod_editorial')) {
+            $libro->editoriales()->sync($request->input('Cod_editorial'));
+        }
 
         // Redirigir al índice de libros con un mensaje de éxito
         return redirect()->route('libros.index')->with('success', 'Libro agregado exitosamente');
@@ -72,39 +80,48 @@ class LibroController extends Controller
     }
 
     public function update(LibroForRequest $request, Libro $libro)
-    {
-        // Asignar las propiedades del libro desde el request
-        $libro->Titulo = $request->Titulo;
-        $libro->Edicion = $request->Edicion;
-        $libro->Idioma = $request->Idioma;
-        $libro->Descripcion = $request->Descripcion;
-        $libro->CantPaginas = $request->CantPaginas;
-        $libro->CopiasDisp = $request->CopiasDisp;
-        $libro->Id_Estado = $request->Id_Estado;
-        $libro->save();
+{
+    // Asignar las propiedades del libro desde el request validado
+    $validated = $request->validated();
+    $libro->update($validated);
 
-        // Actualizar las relaciones de muchos a muchos
-        if ($request->has('Cod_Autor')) {
-            $libro->autores()->sync($request->Cod_Autor);
-        }
-
-        if ($request->has('Cod_Categoria')) {
-            $libro->categorias()->sync($request->Cod_Categoria);
-        }
-
-        if ($request->has('Cod_editorial')) {
-            $libro->editoriales()->sync($request->Cod_editorial);
-        }
-
-        return redirect()->route('libros.index')->with('success', 'Libro actualizado exitosamente');
+    // Asegurarse de que no haya duplicados en los inputs y sincronizar sin insertar duplicados
+    if ($request->has('Cod_Autor')) {
+        $autores = array_unique($request->input('Cod_Autor'));
+        $libro->autores()->sync($autores);
     }
+
+    if ($request->has('Cod_Categoria')) {
+        $categorias = array_unique($request->input('Cod_Categoria'));
+        $libro->categorias()->sync($categorias);
+    }
+
+    if ($request->has('Cod_editorial')) {
+        $editoriales = array_unique($request->input('Cod_editorial'));
+        
+        // Revisar qué editoriales ya están vinculadas para evitar duplicación
+        $existingEditorials = $libro->editoriales()->pluck('editorial_libro.Cod_Editorial')->toArray(); // Especifica la tabla
+        
+        $newEditorials = array_diff($editoriales, $existingEditorials); // Solo sincronizar las nuevas
+
+        if (!empty($newEditorials)) {
+            $libro->editoriales()->attach($newEditorials);  // Agregar solo las nuevas
+        }
+    }
+
+    return redirect()->route('libros.index')->with('success', 'Libro actualizado exitosamente');
+}
+
 
     public function destroy(Libro $libro)
     {
+        // Eliminar el libro y sus relaciones en las tablas pivote
+        $libro->autores()->detach();
+        $libro->categorias()->detach();
+        $libro->editoriales()->detach();
+        
         $libro->delete();
 
         return redirect()->route('libros.index')->with('success', 'Libro eliminado exitosamente');
     }
 }
-
-
